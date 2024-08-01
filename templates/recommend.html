@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Recommender</title>
+    <style>
+        body {
+            background-color: #fff5d7;
+            font-family: Arial, sans-serif;
+        }
+        .text-red {
+            color: red;
+            text-align: center;
+            font-size: 3rem;
+            margin-top: 10px;
+        }
+        .text-black {
+            text-align: left;
+            font-size: 17px;
+        }
+        .navbar {
+            background-color: rebeccapurple;
+            padding: 0.3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            color: dodgerblue;
+            font-size: 1.5rem;
+        }
+        .nav {
+            display: flex;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-item {
+            margin-right: 12rem;
+            color: dodgerblue;
+        }
+        .nav-link {
+            color: dodgerblue;
+            text-decoration: none;
+            padding: 0.5rem;
+        }
+        .nav-link:hover {
+            background-color: purple;
+        }
+        .container {
+            padding: 20px;
+        }
+        .book-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 70px;
+            justify-content: left;
+        }
+        .book-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 150px;
+            margin: 40px;
+            margin-bottom: 5px;
+        }
+        .book-card img {
+            width: 200px;
+            height: 300px;
+            margin-bottom: 10px;
+        }
+        .book-details h3 {
+            margin: 5px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <p class="navbar-brand">Book Recommender</p>
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/recommend">Recommend</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+            </li>
+        </ul>
+    </nav>
+
+    <h1 class="text-red">Book Recommendations</h1>
+    <form action="/recommend_books" method="post">
+        <input name="user_input" type="text" class="form-control"><br>
+        <input type="submit" value="Let's Go" style="background-color: orange; color: white; font-size: large; padding: 10px 20px; border: none; cursor: pointer;">
+    </form>
+
+    <div class="container">
+        <div class="book-list">
+            {% if data %}
+                {% for book in data %}
+                    <div class="book-card">
+                        <img src="{{ book[2] }}" alt="{{ book[0] }}">
+                        <div class="book-details">
+                            <p class="text-black">{{ book[0] }}</p>
+                            <p class="text-black">{{ book[1] }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
